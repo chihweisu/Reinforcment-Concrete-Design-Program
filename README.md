@@ -1,26 +1,41 @@
-
-
-<h1 align="center">Reinforcment-Concrete-Design-Program</h1>
-<h2 align="center">
-
-## About The Project
-This program provide users to analyze RC sections strength including RC beam and RC column. Strength calculations are based on ACI-318 code.   
-
-
-## How to use
-  run `starter.py`, GUI will appear as shown below:
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/tbeam.gif" width="40%" >
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/png_banner.png" width="60%" >
   </div> 
   
+## About The Project
+This program provides users to analyze RC sections strength including RC beam and RC column. Strength calculations are based on ACI-318 code.   
 
+
+## How to Use
+  run `starter.py`, GUI menu will appear as shown below:
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/png_menu.PNG" width="30%" >
+  </div> 
+  
+## RC Rectangular Beam Calculation
+  Input section informations and load deamands of the beam, the program will check if the beam's moment and shear capacity are enough.
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_recbeamcal.gif" width="30%" >
+  </div> 
+  
+## RC T-Beam Calculation
+  Input section informations and load deamands of the beam, the program will check if the beam's moment and shear capacity are enough.
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_tbeam.gif" width="35%" >
+  </div>
+  
+## RC Beam Design
+  Input section informations and load deamands of the beam, the program will design the required reinforcement of the beam.
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_beamdsgn.gif" width="40%" >
+  </div> 
+  
+## RC Column Calculation
+  Input section informations and load deamands of the column, the program will draw the P-M-M interation diagram to check if the columns's capacity is enough.
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_colcal.gif" width="60%" >
+  </div> 
+  
+  
 ## Contact
 
-2. General System Protection
-
-    + Enable Gatekeeper?
-    	- Defend against malware by enforcing code signing and verifying downloaded applications before allowing them to run.
-    + Prevent automatic software whitelisting?
-        - Both built-in and downloaded software will require user approval for whitelisting.
-    + Disable Captive Portal Assistant and force login through browser on untrusted networks?
-        - Captive Portal Assistant could be triggered and direct you to a malicious site WITHOUT any user interaction.
