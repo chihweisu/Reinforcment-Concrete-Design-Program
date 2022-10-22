@@ -10,7 +10,7 @@ This program provide users to analyze RC sections strength including RC beam and
 ## How to use
   run `starter.py`, GUI will appear as shown below:
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/tbeam.gif" width="20%">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/tbeam.gif" width="30%">
   </div> 
   
 
