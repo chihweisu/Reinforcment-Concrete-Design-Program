@@ -4,13 +4,10 @@
 <h2 align="center">
 
 ## About The Project
-This project provides structural engineers a convinient tool while running pushover analysis. 
-Once you input a capacity spectrum file and demand spectrum parameters, the tools will automatically do the iteration and find structure's performance point based on given parameters.
-You can also save the figure quickly
+This program provide users to analyze RC sections strength including RC beam and RC column. Strength calculations are based on ACI-318 code.   
 
 
-## Geting Started
-### Step 1
+## How to use
   run `starter.py`, GUI will appear as shown below:
   <div align="center">
   <img  src="https://raw.githubusercontent.com/chihweisu/Pushover-Analysis-Get-Performance-Point/e13abf66c921035a7d75f57e67bb961a3cb3af52/Readme_asset/1.PNG" width="50%">
@@ -18,3 +15,12 @@ You can also save the figure quickly
   
 
 ## Contact
+
+2. General System Protection
+
+    + Enable Gatekeeper?
+    	- Defend against malware by enforcing code signing and verifying downloaded applications before allowing them to run.
+    + Prevent automatic software whitelisting?
+        - Both built-in and downloaded software will require user approval for whitelisting.
+    + Disable Captive Portal Assistant and force login through browser on untrusted networks?
+        - Captive Portal Assistant could be triggered and direct you to a malicious site WITHOUT any user interaction.
