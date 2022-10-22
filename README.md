@@ -10,7 +10,7 @@ This program provide users to analyze RC sections strength including RC beam and
 ## How to use
   run `starter.py`, GUI will appear as shown below:
   <div align="center">
-  <img  src="https://raw.githubusercontent.com/chihweisu/Pushover-Analysis-Get-Performance-Point/e13abf66c921035a7d75f57e67bb961a3cb3af52/Readme_asset/1.PNG" width="50%">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/tbeam.gif" width="50%">
   </div> 
   
 
