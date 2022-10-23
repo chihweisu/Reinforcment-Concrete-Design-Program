@@ -38,6 +38,10 @@ This program provides users to analyze RC sections strength including RC beam an
   </div> 
   
 ## About the code
+  <div align="center">
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/code_mind.png" width="40%" >
+  </div> 
+  
 
 ## Contact
 
