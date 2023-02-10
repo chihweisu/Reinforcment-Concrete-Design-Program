@@ -1,10 +1,15 @@
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/png_banner.png" width="60%" >
+  <img  src="https://github.com/chihweisu/Steel-Structure-Design-Program/blob/master/Readme_asset/png_banner.png" width="60%" >
   </div> 
   
 ## About The Program
 This program provides users to analyze RC sections strength including RC beam and RC column. Strength calculations are based on ACI-318 code.   
 
+## Installation
+```python
+$ python -m pip install  matplotlib
+$ python -m pip install  PyQt5, pyqt5-tools
+```
 
 ## How to Use
   run `starter.py`
@@ -22,19 +27,19 @@ This program provides users to analyze RC sections strength including RC beam an
   * **RC T-Beam Calculation** :   
   Input section informations and load deamands of the beam, the program will check if the beam's moment and shear capacity are enough.
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_tbeam.gif" width="35%" >
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_tbeam.gif" width="40%" >
   </div>
   
   * **RC Beam Design** :   
   Input section informations and load deamands of the beam, the program will design the required reinforcement of the beam.
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_beamdsgn.gif" width="40%" >
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_beamdsgn.gif" width="45%" >
   </div> 
   
   * **RC Column Calculation** :   
   Input section informations and load deamands of the column, the program will draw the P-M-M interation diagram to check if the columns's capacity is enough.
   <div align="center">
-  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_colcal.gif" width="60%" >
+  <img  src="https://github.com/chihweisu/Reinforcment-Concrete-Design-Program/blob/master/Readme_asset/gif_colcal.gif" width="65%" >
   </div> 
   
 ## About the code
