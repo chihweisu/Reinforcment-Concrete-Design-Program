@@ -2,7 +2,7 @@ from cmath import atan
 import numpy as np
 import pandas as pd
 import math
-from beam_function import get_beta, get_EandG_vaule,rebar_info,Cal_d_eff
+from beam_function import get_beta, get_EandG_vaule,rebar_info,cal_d_eff
 
 def get_column_section_info(B,D,fc,fy,bar1,bar2,stirrup_size):
     beta=get_beta(fc)
@@ -99,8 +99,8 @@ def find_interaction_point(B,D,concrete_df,alpha,beta,c,d_max,fc,rebar_df,Es,fy)
     # print( stress_block_shape)
     points_ord=[[concrete_df.loc[i,'x0'],concrete_df.loc[i,'y0']] for i in  stress_block_shape]
     # print(points_ord)
-    [Cc,Mnx_rc,Mny_rc]=Cal_Cc(points_ord,fc,c)
-    [rebar_df,Fs,Mnx_s,Mny_s]=Cal_Fs_T(rebar_df,alpha,d_max,c,beta,Es,fc,fy)
+    [Cc,Mnx_rc,Mny_rc]=cal_Cc(points_ord,fc,c)
+    [rebar_df,Fs,Mnx_s,Mny_s]=cal_Fs_T(rebar_df,alpha,d_max,c,beta,Es,fc,fy)
     Pn=Cc+Fs
     Mnx=Mnx_rc+Mnx_s
     Mny=Mny_rc+Mny_s
@@ -109,7 +109,7 @@ def find_interaction_point(B,D,concrete_df,alpha,beta,c,d_max,fc,rebar_df,Es,fy)
     # print(np.degrees(math.atan2(Mny,Mnx)))
     return round(Pn,2), round(Mnx,2), round(Mny,2), round(phi,2)
 
-def Cal_Cc(points_ord,fc,c):
+def cal_Cc(points_ord,fc,c):
     if c<=0 :
         Cc=0
         Mnx_rc=0
@@ -123,7 +123,7 @@ def Cal_Cc(points_ord,fc,c):
 
     return Cc,Mnx_rc,Mny_rc
 
-def Cal_Fs_T(df,alpha,d_max,c,beta,Es,fc,fy):
+def cal_Fs_T(df,alpha,d_max,c,beta,Es,fc,fy):
     df["y_alpha"]=df["y0"]*math.cos(math.radians(alpha))-df["x0"]*math.sin(math.radians(alpha))
     df["yy_alpha"]=d_max/2-df["y_alpha"]
     df["epsilon"]=0.003*(1-df["yy_alpha"]/c)

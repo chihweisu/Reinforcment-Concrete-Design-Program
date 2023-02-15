@@ -14,7 +14,7 @@ class MplCanvas(FigureCanvas,QThread):
         FigureCanvas.updateGeometry(self)
         self.fig.set_size_inches(1,1)
 
-class rcpmmwidget(QtWidgets.QWidget):
+class RcPmmWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.canvas = MplCanvas()

@@ -2,7 +2,7 @@ import math
 import numpy as np
 from beam_function import *
 
-def TBeamCalButtonClicked(data):
+def tbeam_cal_button_clicked(data):
     try :
         B=float(data.width.text())
         D=float(data.depth.text())
@@ -24,16 +24,16 @@ def TBeamCalButtonClicked(data):
         Vuy=float(data.Vuy.text()) #tf
 
         PrtctT=get_clear_cover('Beam') #cm
-        BarAllowabelNumClicked(data,'Beam')
+        bar_allowable_num_clicked(data,'Beam')
         #計算有效翼寬
-        be=Cal_effective_width(BeamCondition,B,Sn,hf,length)
+        be=cal_effective_width(BeamCondition,B,Sn,hf,length)
 
         [beta,Ec,bard1,Ab_rebar1,bard2,Ab_rebar2,As,Ass,d,dt,dd,db_stirrup,Ab_stirrup,\
             RebarAllowabelNumPerRow1,RebarAllowabelNumPerRow2]=get_section_info(B,D,fc,fy,\
             rebar_size1,rebar_size2,tensilebar_num,compressionbar_num,stirrup_size,PrtctT,cnstrctblty,"Beam")
         
         #計算彎矩強度
-        [Asy,result0,c,Cc,Cs,Mn]=Cal_Tbeam_Mn(dd,beta,hf,fc,fy,B,d,be,Ass,As)
+        [Asy,result0,c,Cc,Cs,Mn]=cal_tbeam_Mn(dd,beta,hf,fc,fy,B,d,be,Ass,As)
         [es,et,result1,result2,phi]=cal_phi(c,d,dt)
 
         #剪力強度計算

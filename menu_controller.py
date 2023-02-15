@@ -1,23 +1,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from menu import Ui_menu
-from RC_RecbeamCal import Ui_RCRecbeamCal
-from RC_RecbeamCal_base import RecBeamCalButtonClicked
-from RC_TbeamCal import Ui_RCTbeamCal
-from RC_TbeamCal_base import TBeamCalButtonClicked
-from RC_BeamDsgn import Ui_RCBeamDsgn
-from RC_BeamDsgn_base import BeamDsgnButtonClicked
-from RC_ColumnCal import Ui_RCColumnCal
-from RC_ColumnCal_base import ColumnCalButtonClicked
-from beam_function import BarAllowabelNumClicked
-from  DataFrameModel import  DataFrameModel
+from ui_menu import Ui_Menu
+from ui_rc_recbeamcal import Ui_RcRecBeamCal
+from rc_recbeamcal_base import recbeam_cal_button_clicked
+from ui_rc_tbeamcal import Ui_RcTBeamCal
+from rc_tbeamcal_base import tbeam_cal_button_clicked
+from ui_rc_beamdsgn import Ui_RcBeamDsgn
+from rc_beamdsgn_base import beam_dsgn_button_clicked
+from ui_rc_columncal import Ui_RcColumnCal
+from rc_columncal_base import column_cal_button_clicked
+from beam_function import bar_allowable_num_clicked
+from  dataframe_model import  DataFrameModel
 
-class menu_controller(QtWidgets.QMainWindow):
+class MenuController(QtWidgets.QMainWindow):
   # signal=QtCore.pyqtSignal(list)
   def __init__(self):
       super().__init__()  # in python3, super(Class, self).xxx = super().xxx
       self.setWindowIcon(QtGui.QIcon('cover.png'))
       # self.setWindowTitle("title")
-      self.ui = Ui_menu()
+      self.ui = Ui_Menu()
       self.ui.setupUi(self)
       self.setup_control()
 
@@ -25,35 +25,35 @@ class menu_controller(QtWidgets.QMainWindow):
       # TODO
       # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
       # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-      self.ui.RC_RecbeamCal.clicked.connect(self.RC_RecbeamCalClicked)
-      self.ui.RC_TbeamCal.clicked.connect(self.RC_TbeamCalClicked)
-      self.ui.RC_BeamDsgn.clicked.connect(self.RC_BeamDsgnClicked)
-      self.ui.RC_ColumnCal.clicked.connect(self.RC_ColumnCalClicked)
+      self.ui.RC_RecbeamCal.clicked.connect(self.rc_recbeam_cal_clicked)
+      self.ui.RC_TbeamCal.clicked.connect(self.rc_tbeam_cal_clicked)
+      self.ui.RC_BeamDsgn.clicked.connect(self.rc_beam_dsgn_clicked)
+      self.ui.RC_ColumnCal.clicked.connect(self.rc_column_cal_clicked)
 
-  def RC_RecbeamCalClicked(self):
+  def rc_recbeam_cal_clicked(self):
     self.hide()
-    self.ui=w2_controller()
+    self.ui=W2Controller()
     self.ui.show()
 
-  def RC_TbeamCalClicked(self):
+  def rc_tbeam_cal_clicked(self):
     self.hide()
-    self.ui=w3_controller()
-    self.ui.show()
-  
-  def RC_BeamDsgnClicked(self) :
-    self.hide()
-    self.ui=w4_controller()
-    self.ui.show()
-
-  def RC_ColumnCalClicked(self):
-    self.hide()
-    self.ui=w5_controller()
+    self.ui=W3Controller()
     self.ui.show()
   
+  def rc_beam_dsgn_clicked(self) :
+    self.hide()
+    self.ui=W4Controller()
+    self.ui.show()
 
-class w2_controller(QtWidgets.QMainWindow,Ui_RCRecbeamCal):
+  def rc_column_cal_clicked(self):
+    self.hide()
+    self.ui=W5Controller()
+    self.ui.show()
+  
+
+class W2Controller(QtWidgets.QMainWindow,Ui_RcRecBeamCal):
   def __init__(self):
-    super(w2_controller,self).__init__()
+    super(W2Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -65,23 +65,23 @@ class w2_controller(QtWidgets.QMainWindow,Ui_RCRecbeamCal):
     self.Mux.setText('0')
     self.Vuy.setText('0')
     self.Tu.setText('0')
-    self.closeButton1.clicked.connect(self.closebutton1Clicked)    
-    self.constructability.clicked.connect(self.constructabilityClicked)
-    self.calbutton.clicked.connect(lambda:RecBeamCalButtonClicked(self))
-    self.barallowbutton.clicked.connect(lambda:BarAllowabelNumClicked(self,'Beam'))
+    self.closeButton1.clicked.connect(self.closebutton1_clicked)    
+    self.constructability.clicked.connect(self.constructability_clicked)
+    self.calbutton.clicked.connect(lambda:recbeam_cal_button_clicked(self))
+    self.barallowbutton.clicked.connect(lambda:bar_allowable_num_clicked(self,'Beam'))
 
-  def constructabilityClicked(self) :
+  def constructability_clicked(self) :
     self.cnstrctblty='yes' if self.constructability.isChecked() else 'no'
     return self.cnstrctblty
 
-  def closebutton1Clicked(self):
+  def closebutton1_clicked(self):
     self.hide()
-    self.ui=menu_controller()
+    self.ui=MenuController()
     self.ui.show()
 
-class w3_controller(Ui_RCTbeamCal,w2_controller,QtWidgets.QMainWindow):
+class W3Controller(Ui_RcTBeamCal,W2Controller,QtWidgets.QMainWindow):
   def __init__(self):
-    super(w3_controller,self).__init__()
+    super(W3Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -92,14 +92,14 @@ class w3_controller(Ui_RCTbeamCal,w2_controller,QtWidgets.QMainWindow):
     self.Mux.setText('0')
     self.Vuy.setText('0')
     self.Tu.setText('0')
-    self.closeButton1.clicked.connect(self.closebutton1Clicked)    
-    self.constructability.clicked.connect(self.constructabilityClicked)
-    self.calbutton.clicked.connect(lambda:TBeamCalButtonClicked(self))
-    self.barallowbutton.clicked.connect(lambda:BarAllowabelNumClicked(self,'Beam'))
+    self.closeButton1.clicked.connect(self.closebutton1_clicked)    
+    self.constructability.clicked.connect(self.constructability_clicked)
+    self.calbutton.clicked.connect(lambda:tbeam_cal_button_clicked(self))
+    self.barallowbutton.clicked.connect(lambda:bar_allowable_num_clicked(self,'Beam'))
 
-class w4_controller(Ui_RCBeamDsgn,w2_controller,QtWidgets.QMainWindow):
+class W4Controller(Ui_RcBeamDsgn,W2Controller,QtWidgets.QMainWindow):
   def __init__(self):
-    super(w4_controller,self).__init__()
+    super(W4Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -121,23 +121,23 @@ class w4_controller(Ui_RCBeamDsgn,w2_controller,QtWidgets.QMainWindow):
     self.Mu_rght_plus.setText('0')
     self.Vg_rght.setText('0')
     self.Tu_rght.setText('0')
-    self.constructability.clicked.connect(self.constructabilityClicked)
-    self.ConsiderCompressionBar.clicked.connect(self.ConsiderCompressionBarClicked)
-    self.ConsiderTbeam.clicked.connect(self.ConsiderTbeamClicked)
-    self.dsgnbutton.clicked.connect(lambda:BeamDsgnButtonClicked(self))
-    self.closeButton1.clicked.connect(self.closebutton1Clicked)  
+    self.constructability.clicked.connect(self.constructability_clicked)
+    self.ConsiderCompressionBar.clicked.connect(self.consider_compression_bar_clicked)
+    self.ConsiderTbeam.clicked.connect(self.consider_tbeam_clicked)
+    self.dsgnbutton.clicked.connect(lambda:beam_dsgn_button_clicked(self))
+    self.closeButton1.clicked.connect(self.closebutton1_clicked)  
 
-  def ConsiderCompressionBarClicked(self) :
+  def consider_compression_bar_clicked(self) :
     self.CCompBar='yes' if self.ConsiderCompressionBar.isChecked() else 'no'
     return self.CCompBar
-  def ConsiderTbeamClicked(self) :
+  def consider_tbeam_clicked(self) :
     self.CTbeam='yes' if self.ConsiderTbeam.isChecked() else 'no'
     return self.CTbeam
 
-class w5_controller(Ui_RCColumnCal,w2_controller,QtWidgets.QMainWindow):
+class W5Controller(Ui_RcColumnCal,W2Controller,QtWidgets.QMainWindow):
   signal=QtCore.pyqtSignal(list)
   def __init__(self):
-    super(w5_controller,self).__init__()
+    super(W5Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -148,17 +148,17 @@ class w5_controller(Ui_RCColumnCal,w2_controller,QtWidgets.QMainWindow):
     self.Mux.setText('0')
     self.Muy.setText('0')
     self.Pu.setText('0')
-    self.closeButton1.clicked.connect(self.closebutton1Clicked)    
-    self.constructability.clicked.connect(self.constructabilityClicked)
-    self.calbutton.clicked.connect(self.calbuttonClicked)
-    self.barallowbutton.clicked.connect(lambda:BarAllowabelNumClicked(self,'Column'))
+    self.closeButton1.clicked.connect(self.closebutton1_clicked)    
+    self.constructability.clicked.connect(self.constructability_clicked)
+    self.calbutton.clicked.connect(self.calbutton_clicked)
+    self.barallowbutton.clicked.connect(lambda:bar_allowable_num_clicked(self,'Column'))
     self.PicChangeButton.clicked.connect(self.picchangeclicked)
     self.signal.connect(self.aa)
 
-  def calbuttonClicked(self):
+  def calbutton_clicked(self):
     self.textBrowser.setText('running.......')
     QtWidgets.QApplication.processEvents()
-    ColumnCalButtonClicked(self)
+    column_cal_button_clicked(self)
 
   def aa(self,result):
     self.result=result

@@ -29,7 +29,7 @@ def get_clear_cover(keyin):
     return chart.get(keyin,'none')
 
 
-def Cal_BarAllowabelNum(B,PrtctT,rebar_d,stirrup_d,cnstrctblty,type) :
+def cal_bar_allowable_num(B,PrtctT,rebar_d,stirrup_d,cnstrctblty,type) :
     if type=='Beam' :
         cleardb_h=1.5*max(2.5,rebar_d) if cnstrctblty=='yes' else  max(2.5,rebar_d)
     elif type=='Column' :
@@ -38,7 +38,7 @@ def Cal_BarAllowabelNum(B,PrtctT,rebar_d,stirrup_d,cnstrctblty,type) :
     return RebarAllowabelNumPerRow,cleardb_h
 
 
-def BarAllowabelNumClicked(data,type):
+def bar_allowable_num_clicked(data,type):
     try :
         PrtctT=get_clear_cover(type)
         data.barallowtext.setText('')
@@ -48,7 +48,7 @@ def BarAllowabelNumClicked(data,type):
         BarAllowNum=[]
         for i in barchart:
             rebar_d, Ab=rebar_info(i)
-            RebarAllowabelNumPerRow,cleardb_h=Cal_BarAllowabelNum(B,PrtctT,rebar_d,1.588,cnstrctblty,type)
+            RebarAllowabelNumPerRow,cleardb_h=cal_bar_allowable_num(B,PrtctT,rebar_d,1.588,cnstrctblty,type)
             BarAllowNum.append(str(RebarAllowabelNumPerRow))
         for i in range(len(barchart)):
             data.barallowtext.append(barchart[i]+'單排容許量 :'+BarAllowNum[i]+'根')
@@ -68,8 +68,8 @@ def get_beta(fc):
     beta=0.85 if fc <= 280  else max(0.65,0.85-0.05/70*(fc-280))
     return beta
 
-def Cal_d_eff(B,D,PrtctT,rebar_d,stirrup_d,RebarNum,cnstrctblty,type):
-    RebarAllowabelNumPerRow,cleardb_h=Cal_BarAllowabelNum(B,PrtctT,rebar_d,stirrup_d,cnstrctblty,type)
+def cal_d_eff(B,D,PrtctT,rebar_d,stirrup_d,RebarNum,cnstrctblty,type):
+    RebarAllowabelNumPerRow,cleardb_h=cal_bar_allowable_num(B,PrtctT,rebar_d,stirrup_d,cnstrctblty,type)
     arrange=arrange_rebar(RebarNum,RebarAllowabelNumPerRow)
     if arrange == 1 :
         d=D-PrtctT-stirrup_d-rebar_d/2
@@ -91,8 +91,8 @@ def get_section_info(B,D,fc,fy,bar1,bar2,tensilebar_num,compressionbar_num,stirr
     [db_stirrup,Ab_stirrup]=rebar_info(stirrup_size)
     As=tensilebar_num*Ab_rebar1
     Ass=compressionbar_num*Ab_rebar2
-    [d,dt,RebarAllowabelNumPerRow1]=Cal_d_eff(B,D,PrtctT,db_rebar1,db_stirrup,tensilebar_num,cnstrctblty,type)
-    [dd0,ddt,RebarAllowabelNumPerRow2]=Cal_d_eff(B,D,PrtctT,db_rebar2,db_stirrup,compressionbar_num,cnstrctblty,type)
+    [d,dt,RebarAllowabelNumPerRow1]=cal_d_eff(B,D,PrtctT,db_rebar1,db_stirrup,tensilebar_num,cnstrctblty,type)
+    [dd0,ddt,RebarAllowabelNumPerRow2]=cal_d_eff(B,D,PrtctT,db_rebar2,db_stirrup,compressionbar_num,cnstrctblty,type)
     dd=D-dd0
     return beta,Ec,db_rebar1,Ab_rebar1,db_rebar2,Ab_rebar2,As,Ass,d,dt,dd,db_stirrup,Ab_stirrup,RebarAllowabelNumPerRow1,RebarAllowabelNumPerRow2
 
@@ -161,7 +161,7 @@ def check_stirrup_span_limit(Vu,Vc,fc,fy,B,d,Av) :
     return s_max
 
 #////////////////// For   矩形梁///////////////////////////
-def Cal_Recbeam_Mn(dd,fc,beta,B,d,fy,Ass,As) :
+def cal_recbeam_Mn(dd,fc,beta,B,d,fy,Ass,As) :
     cy=3*dd
     Asy=0.85*fc*beta*cy*B/fy+Ass*(fy-0.85*fc)/fy #壓筋降伏時對應的拉力鋼筋量
     if As >=Asy : #壓筋降伏
@@ -185,7 +185,7 @@ def Cal_Recbeam_Mn(dd,fc,beta,B,d,fy,Ass,As) :
 
 #///////////////////////For T型梁////////////////////////
 #計算有效翼寬
-def Cal_effective_width(BeamCondition,B,Sn,hf,length) :
+def cal_effective_width(BeamCondition,B,Sn,hf,length) :
     if BeamCondition=='內梁' :
         be=min(length/4,B+Sn,B+16*hf)
     else :
@@ -193,7 +193,7 @@ def Cal_effective_width(BeamCondition,B,Sn,hf,length) :
     return be
 
 #計算彎矩強度
-def Cal_Tbeam_Mn(dd,beta,hf,fc,fy,B,d,be,Ass,As) :
+def cal_tbeam_Mn(dd,beta,hf,fc,fy,B,d,be,Ass,As) :
     #計算臨界斷面的拉力鋼筋量(c=hf的情況下拉筋需降伏的臨界鋼筋量)
     Ccritical=hf/beta
     fsscritical=6120/Ccritical*(Ccritical-dd)

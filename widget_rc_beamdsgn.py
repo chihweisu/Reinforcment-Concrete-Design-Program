@@ -3,7 +3,7 @@ from PyQt5.QtCore import QThread, Qt, QRect
 from PyQt5.QtGui import QPainter, QPen, QColor,QFont
 
 
-class rcbeamdsgnwidget(QtWidgets.QWidget):
+class RcBeamDsgnWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.drawornot = 'no'

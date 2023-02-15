@@ -9,9 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from widget_rc_tbeam import RcTBeamWidget
+import icons_rc
 
 
-class Ui_RCTbeamCal(object):
+class Ui_RcTBeamCal(object):
     def setupUi(self, RCTbeamCal):
         RCTbeamCal.setObjectName("RCTbeamCal")
         RCTbeamCal.resize(561, 661)
@@ -637,7 +639,7 @@ class Ui_RCTbeamCal(object):
         self.beam_condition.addItem("")
         self.beam_condition.addItem("")
         self.verticalLayout_5.addWidget(self.beam_condition)
-        self.rctbeamwidget = rctbeamwidget(self.centralwidget)
+        self.rctbeamwidget = RcTBeamWidget(self.centralwidget)
         self.rctbeamwidget.setGeometry(QtCore.QRect(230, 340, 301, 201))
         self.rctbeamwidget.setObjectName("rctbeamwidget")
         self.formLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
@@ -918,15 +920,14 @@ class Ui_RCTbeamCal(object):
         self.label_Vuy.setText(_translate("RCTbeamCal", "     Vu (tf)    "))
         self.label_Tu.setText(_translate("RCTbeamCal", "    Tu (tf-m)  "))
         self.constructability.setText(_translate("RCTbeamCal", "考慮施工性"))
-from rctbeamwidget import rctbeamwidget
-import icons_rc
+
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     RCTbeamCal = QtWidgets.QMainWindow()
-    ui = Ui_RCTbeamCal()
+    ui = Ui_RcTBeamCal()
     ui.setupUi(RCTbeamCal)
     RCTbeamCal.show()
     sys.exit(app.exec_())

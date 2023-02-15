@@ -9,9 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from widget_rc_beamdsgn import RcBeamDsgnWidget
+import icons_rc
 
 
-class Ui_RCBeamDsgn(object):
+class Ui_RcBeamDsgn(object):
     def setupUi(self, RCBeamDsgn):
         RCBeamDsgn.setObjectName("RCBeamDsgn")
         RCBeamDsgn.resize(561, 725)
@@ -1307,7 +1309,7 @@ class Ui_RCBeamDsgn(object):
         self.ConsiderTbeam.setStyleSheet("background-color: rgb(170, 0, 0);")
         self.ConsiderTbeam.setObjectName("ConsiderTbeam")
         self.verticalLayout.addWidget(self.ConsiderTbeam)
-        self.rcbeamdsgnwidget = rcbeamdsgnwidget(self.centralwidget)
+        self.rcbeamdsgnwidget = RcBeamDsgnWidget(self.centralwidget)
         self.rcbeamdsgnwidget.setGeometry(QtCore.QRect(20, 480, 501, 151))
         self.rcbeamdsgnwidget.setObjectName("rcbeamdsgnwidget")
         RCBeamDsgn.setCentralWidget(self.centralwidget)
@@ -1359,15 +1361,13 @@ class Ui_RCBeamDsgn(object):
         self.constructability.setText(_translate("RCBeamDsgn", "考慮施工性"))
         self.ConsiderCompressionBar.setText(_translate("RCBeamDsgn", "雙筋設計"))
         self.ConsiderTbeam.setText(_translate("RCBeamDsgn", "考慮樓版貢獻(T型梁)"))
-from rcbeamdsgnwidget import rcbeamdsgnwidget
-import icons_rc
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     RCBeamDsgn = QtWidgets.QMainWindow()
-    ui = Ui_RCBeamDsgn()
+    ui = Ui_RcBeamDsgn()
     ui.setupUi(RCBeamDsgn)
     RCBeamDsgn.show()
     sys.exit(app.exec_())

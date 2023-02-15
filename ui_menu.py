@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import icons_rc
 
-class Ui_menu(object):
+class Ui_Menu(object):
     def setupUi(self, menu):
         menu.setObjectName("menu")
         menu.resize(438, 328)
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     menu = QtWidgets.QMainWindow()
-    ui = Ui_menu()
+    ui = Ui_Menu()
     ui.setupUi(menu)
     menu.show()
     sys.exit(app.exec_())

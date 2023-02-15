@@ -1,7 +1,7 @@
 import math
 from beam_function import *
 
-def RecBeamCalButtonClicked(data):
+def recbeam_cal_button_clicked(data):
     try :
         B=float(data.width.text()) #cm
         D=float(data.depth.text()) #cm
@@ -19,7 +19,7 @@ def RecBeamCalButtonClicked(data):
         Vuy=float(data.Vuy.text()) #tf
         
         PrtctT=get_clear_cover('Beam') #cm
-        BarAllowabelNumClicked(data,'Beam')
+        bar_allowable_num_clicked(data,'Beam')
 
         
         [beta,Ec,bard1,Ab_rebar1,bard2,Ab_rebar2,As,Ass,d,dt,dd,db_stirrup,Ab_stirrup,\
@@ -27,7 +27,7 @@ def RecBeamCalButtonClicked(data):
             rebar_size1,rebar_size2,tensilebar_num,compressionbar_num,stirrup_size,PrtctT,cnstrctblty,"Beam")
 
         #檢核壓筋是否降伏
-        [Asy,result0,c,Cc,Cs,Mn]=Cal_Recbeam_Mn(dd,fc,beta,B,d,fy,Ass,As)
+        [Asy,result0,c,Cc,Cs,Mn]=cal_recbeam_Mn(dd,fc,beta,B,d,fy,Ass,As)
         [es,et,result1,result2,phi]=cal_phi(c,d,dt)
 
         #剪力強度計算

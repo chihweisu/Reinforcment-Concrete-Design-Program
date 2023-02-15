@@ -1,13 +1,13 @@
 import math
-from beam_function import stirrup_info,get_clear_cover,BarAllowabelNumClicked,cal_shear_strngth,check_stirrup_span_limit
+from beam_function import stirrup_info,get_clear_cover,bar_allowable_num_clicked,cal_shear_strngth,check_stirrup_span_limit
 from column_function import get_column_section_info,get_rebar_df,get_theta,get_alpha, \
                             build_column_ord,cal_distance_from_point_to_line,find_interaction_point,modify_interaction_diagram,get_pmmratio,\
                             get_mm_diagram
 import numpy as np
 import pandas as pd
-from  DataFrameModel import  DataFrameModel
+from  dataframe_model import  DataFrameModel
 
-def ColumnCalButtonClicked(data):
+def column_cal_button_clicked(data):
     try :
         # data=self
         B=float(data.width.text()) #cm
@@ -32,7 +32,7 @@ def ColumnCalButtonClicked(data):
         rebar_df=get_rebar_df(B,D,cover,Nx,Ny,Ab_rebar1,Ab_rebar2)
         Ast=rebar_df["Ab"].sum()
         Es=2040000 #kgf/cm2
-        BarAllowabelNumClicked(data,'Column')
+        bar_allowable_num_clicked(data,'Column')
         theta=get_theta(Mux,Muy)
         Mu=math.sqrt((Mux)**2+(Muy)**2)
         Pno=round((0.85*fc*(B*D-Ast)+Ast*fy)/1000,1) #tf

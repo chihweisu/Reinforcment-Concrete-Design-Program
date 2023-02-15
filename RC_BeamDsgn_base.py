@@ -1,9 +1,9 @@
 import math
 import numpy as np
-from RC_RecbeamCal_base import math2, Cal_Recbeam_Mn,cal_phi,cal_effectived_beta
-from RC_TbeamCal_base import Cal_effective_width,math2
+from rc_recbeamcal_base import math2, cal_recbeam_Mn,cal_phi,cal_effectived_beta
+from rc_tbeamcal_base import cal_effective_width,math2
 
-def BeamDsgnButtonClicked(data):
+def beam_dsgn_button_clicked(data):
     try :
         B=float(data.width.text())
         D=float(data.depth.text())
@@ -33,14 +33,14 @@ def BeamDsgnButtonClicked(data):
         stirrup_num=2
         stirrup_d=1.27 #cm
         #計算有效翼寬
-        be=Cal_effective_width(BeamCondition,B,Sn,hf,length)
+        be=cal_effective_width(BeamCondition,B,Sn,hf,length)
 
         #配筋設計
         As_dsgn=[]
         Ass_dsgn=[]
         #計算拉筋應變=0.005時所能提供的彎矩
-        [phiMn_rec_tcs,rec_As1]=Cal_rec_TensionControl_single_Mnmax(B,d,fc,fy)
-        [phiMn_T_tcs,T_As1]=Cal_T_TensionControl_single_Mnmax(B,d,hf,be,fc,fy)
+        [phiMn_rec_tcs,rec_As1]=cal_rec_tensioncontrol_single_Mnmax(B,d,fc,fy)
+        [phiMn_T_tcs,T_As1]=cal_t_tensioncontrol_single_Mnmax(B,d,hf,be,fc,fy)
         for i in range(6) :
             if i%2==0 :
                 #負彎矩
@@ -51,7 +51,7 @@ def BeamDsgnButtonClicked(data):
                     input=[rec_As1,phiMn_rec_tcs,'矩形']
                 else :
                     input=[T_As1,phiMn_T_tcs,'T形']
-            [As_dsgn_sg,Ass_dsgn_sg]=Dsgn_beam_As(B,d,dd,be,hf,fc,fy,input[0],Mu[i],input[1],input[2])
+            [As_dsgn_sg,Ass_dsgn_sg]=dsgn_beam_As(B,d,dd,be,hf,fc,fy,input[0],Mu[i],input[1],input[2])
             As_dsgn.append(As_dsgn_sg)
             Ass_dsgn.append(Ass_dsgn_sg)
         As_final=[]
@@ -88,7 +88,7 @@ def BeamDsgnButtonClicked(data):
         [phiMn_all,et_all,bar_ratio]=CheckMratio(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy)
 
         #剪力需求計算
-        Mpr=Cal_Mpr(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) #tf-m
+        Mpr=cal_Mpr(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) #tf-m
         Vsway=[(Mpr[0]+Mpr[3])/(length/100),(Mpr[1]+Mpr[2])/((length-B)/100)] #tf 假設柱尺寸=梁寬
         Ve1=max(abs(Vg[0]+Vsway[0]),abs(Vg[0]-Vsway[1]))
         Ve2=max(abs(Vg[2]-Vsway[0]),abs(Vg[2]+Vsway[1]))
@@ -117,7 +117,7 @@ def BeamDsgnButtonClicked(data):
 
 
         #伸展長度計算   
-        dvlpmnt_length=Cal_development_length(fc,fy,barinfo,choose_bar)
+        dvlpmnt_length=cal_development_length(fc,fy,barinfo,choose_bar)
         
 
         #結果輸出
@@ -143,7 +143,7 @@ def BeamDsgnButtonClicked(data):
     except :
         data.textBrowser.setText('Please input the parameters')
 
-def Dsgn_beam_As(B,d,dd,be,hf,fc,fy,As1,Mu,phiMn_tcs,shape) :
+def dsgn_beam_As(B,d,dd,be,hf,fc,fy,As1,Mu,phiMn_tcs,shape) :
     #拉控斷面配筋法
     if Mu>phiMn_tcs :
         #雙筋
@@ -156,14 +156,14 @@ def Dsgn_beam_As(B,d,dd,be,hf,fc,fy,As1,Mu,phiMn_tcs,shape) :
         Mn_req=Mu/0.9
 
         if shape=='矩形' :
-            As_dsgn=Dsgn_recbeam_single_As(B,d,fc,fy,Mn_req)
+            As_dsgn=dsgn_recbeam_single_As(B,d,fc,fy,Mn_req)
         elif shape=='T形' :
-            As_dsgn=Dsgn_tbeam_single_As(B,d,be,hf,fc,fy,Mn_req)
+            As_dsgn=dsgn_tbeam_single_As(B,d,be,hf,fc,fy,Mn_req)
         Ass_dsgn=0
     return As_dsgn, Ass_dsgn
     
 
-def Dsgn_recbeam_single_As(B,d,fc,fy,Mn_req) :
+def dsgn_recbeam_single_As(B,d,fc,fy,Mn_req) :
     #前提拉筋要降伏
     m=fy/(0.85*fc)
     Rn=Mn_req*1000*100/(B*d**2)
@@ -171,7 +171,7 @@ def Dsgn_recbeam_single_As(B,d,fc,fy,Mn_req) :
     As_req=rho_req*B*d
     return As_req
 
-def Dsgn_tbeam_single_As(B,d,be,hf,fc,fy,Mn_req) :
+def dsgn_tbeam_single_As(B,d,be,hf,fc,fy,Mn_req) :
     Mn_dot=0.85*fc*be*hf*(d-hf/2)/1000/100 #tf-m
     if Mn_req>Mn_dot :
         Mn1=0.85*fc*(be-B)*hf*(d-hf/2)/1000/100
@@ -182,11 +182,11 @@ def Dsgn_tbeam_single_As(B,d,be,hf,fc,fy,Mn_req) :
         a=min(math2(matha,mathb,mathc))
         As_req=0.85*fc*((be-B)*hf+B*a)/fy
     else :
-        As_req=Dsgn_recbeam_single_As(be,d,fc,fy,Mn_req)
+        As_req=dsgn_recbeam_single_As(be,d,fc,fy,Mn_req)
     return As_req
     
 
-def Cal_rec_TensionControl_single_Mnmax(B,d,fc,fy) :
+def cal_rec_tensioncontrol_single_Mnmax(B,d,fc,fy) :
     c=3/8*d #cm
     #計算beta1值
     beta=0.85 if fc <= 280  else max(0.65,0.85-0.05/70*(fc-280))
@@ -195,7 +195,7 @@ def Cal_rec_TensionControl_single_Mnmax(B,d,fc,fy) :
     As=0.85*fc*B*a/fy #cm2
     return phiMn,As
 
-def Cal_T_TensionControl_single_Mnmax(B,d,hf,be,fc,fy):
+def cal_t_tensioncontrol_single_Mnmax(B,d,hf,be,fc,fy):
     c=3/8*d #cm
     #計算beta1值
     beta=0.85 if fc <= 280  else max(0.65,0.85-0.05/70*(fc-280))
@@ -239,7 +239,7 @@ def CheckMratio(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) :
             arrange_use=list(reversed(arrange_use))
         [d,dt,dd,beta]=cal_effectived_beta(arrange_use,D,4,bard,bard,fc,barinfo['#4'][0],
                                             BarNumCal,BarNumMax_PerRow)                                 
-        [Asy,result0,c,Cc,Cs,Mn]=Cal_Recbeam_Mn(dd,fc,beta,B,d,fy,BarNumCal[1]*barA,BarNumCal[0]*barA)
+        [Asy,result0,c,Cc,Cs,Mn]=cal_recbeam_Mn(dd,fc,beta,B,d,fy,BarNumCal[1]*barA,BarNumCal[0]*barA)
         [es,et,result1,result2,phi]=cal_phi(c,d,dt)
         phiMn_all.append(phi*Mn)
         et_all.append(et)
@@ -283,7 +283,7 @@ def Stirrup_Dsgn(Vu,fc,fy,B,d,barinfo) :
     s_dsgn=math.floor(s_dsgn/25)*25 #mm
     return choose_stirrup,stirrup_num,int(s_dsgn),stir_result
 
-def Cal_Mpr(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) :
+def cal_Mpr(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) :
     #以單筋矩形梁計算Mpr
     Mpr=[]
     for i in [0,1,4,5] :
@@ -299,7 +299,7 @@ def Cal_Mpr(barinfo,choose_bar,dsgn_barnum,arrange,B,D,fc,fy) :
         Mpr.append(1.25*fy*As*(d-a/2)/100/1000) #tf-m
     return Mpr
 
-def Cal_development_length(fc,fy,barinfo,choose_bar) :
+def cal_development_length(fc,fy,barinfo,choose_bar) :
     Psi_e=1.3 #頂層鋼筋修正
     Psi_t=1 #鋼筋塗佈修正
     lumbda=1.0 #輕質骨材混凝土修正
